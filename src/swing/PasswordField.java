@@ -2,6 +2,7 @@ package swing;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,6 +25,14 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class PasswordField extends JPasswordField {
 
+    public String getHelperText() {
+       return helperText;
+    }
+
+    public void setHelperText(String helperText) {
+        this.helperText = helperText;
+        repaint();
+    }
     public boolean isShowAndHide() {
         return showAndHide;
     }
@@ -41,6 +50,7 @@ public class PasswordField extends JPasswordField {
         this.labelText = labelText;
     }
 
+
     public Color getLineColor() {
         return lineColor;
     }
@@ -55,6 +65,8 @@ public class PasswordField extends JPasswordField {
     private boolean show;
     private boolean mouseOver = false;
     private String labelText = "Label";
+    private String helperText = "";
+    private int spaceHelperText = 15;
     private Color lineColor = new Color(3, 155, 216);
     private final Image eye;
     private final Image eye_hide;
@@ -166,9 +178,11 @@ public class PasswordField extends JPasswordField {
         g2.fillRect(2, height - 1, width - 4, 1);
         createHintText(g2);
         createLineStyle(g2);
+        
         if (showAndHide) {
             createShowHide(g2);
         }
+        createHelperText(g2);
         g2.dispose();
     }
 
@@ -211,6 +225,19 @@ public class PasswordField extends JPasswordField {
             }
             double x = (width - size) / 2;
             g2.fillRect((int) (x + 2), height - 2, (int) size, 2);
+        }
+    }
+    private void createHelperText(Graphics2D g2) {
+        if (helperText != null && !helperText.equals("")) {
+            Insets in = getInsets();
+            int height = getHeight() - 40;
+            g2.setColor(new Color(255, 76, 76));
+            Font font = getFont();
+            g2.setFont(font.deriveFont(0, font.getSize() - 1));
+            FontMetrics ft = g2.getFontMetrics();
+            Rectangle2D r2 = ft.getStringBounds(labelText, g2);
+            double textY = (15 - r2.getHeight()) / 2f;
+            g2.drawString(helperText, in.right, (int) (height + ft.getAscent() - textY));
         }
     }
 
