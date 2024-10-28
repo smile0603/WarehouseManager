@@ -1,6 +1,7 @@
 package DAO;
 
-import entity.User;
+import entity.NhanVien;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,17 +13,17 @@ public class LoginDAO {
     }
     
     
-    public User getUserNamePassWord(){
-        User u = null;
+    public NhanVien getUserNamePassWord(){
+        NhanVien u = null;
         try {
             Connection con = (Connection) config.JDBCUtil.getConnection();
-            String sql = "SELECT taiKhoan, matKhau FROM tb_dangNhap";
+            String sql = "SELECT maNV, matKhau FROM tb_NhanVien";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){
-                String userName = rs.getString("taiKhoan");
-                String passWord = rs.getString("matKhau");
-                u = new User(userName, passWord);
+                String taiKhoan = rs.getString("maNV");
+                String matKhau = rs.getString("matKhau");
+                u = new NhanVien(taiKhoan, matKhau);
                 
             }
             
@@ -33,26 +34,26 @@ public class LoginDAO {
         }
         return u;
     }
-    public User selectByUserName(String userName){
-        User u = null;
+    public NhanVien selectByMaNV(String maNV){
+        NhanVien nv = null;
         try {
             Connection con = (Connection) config.JDBCUtil.getConnection();
-            String sql = "SELECT * FROM tb_dangNhap WHERE taiKhoan = ?";
+            String sql = "SELECT * FROM tb_NhanVien WHERE maNV = ?";
             PreparedStatement p = (PreparedStatement) con.prepareStatement(sql);
-            p.setString(1, userName);
+            p.setString(1, maNV);
             ResultSet rs = (ResultSet) p.executeQuery();
             while(rs.next()){
-                String taiKhoan = rs.getString("taiKhoan");
+                String taiKhoan = rs.getString("maNV");
                 String matKhau = rs.getString("matKhau");
-                User u1 = new User(taiKhoan, matKhau);
-                u = u1;
+                NhanVien nv_temp = new NhanVien(taiKhoan, matKhau);
+                nv = nv_temp;
             }
             config.JDBCUtil.closeConnection(con);
             
         } catch (SQLException e) {
         
         }
-        return u;
+        return nv;
         
     }
 

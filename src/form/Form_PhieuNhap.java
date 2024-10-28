@@ -35,6 +35,11 @@ public class Form_PhieuNhap extends javax.swing.JPanel {
 
         buttonGradient1.setText("Thêm mới");
         buttonGradient1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonGradient1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGradient1ActionPerformed(evt);
+            }
+        });
 
         buttonGradient2.setText("Xóa");
         buttonGradient2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -171,6 +176,12 @@ public class Form_PhieuNhap extends javax.swing.JPanel {
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
+        // TODO add your handling code here:
+        new Form_ThemPhieuNhap2().setVisible(true);
+        
+    }//GEN-LAST:event_buttonGradient1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

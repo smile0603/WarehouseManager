@@ -2,6 +2,7 @@
 package main;
 
 import DAO.LoginDAO;
+import entity.NhanVien;
 import entity.User;
 import form.Form_Home;
 import java.awt.Color;
@@ -158,13 +159,14 @@ public class Main_Login extends javax.swing.JFrame {
             }
         // kiem tra voi du lieu tu sql
         if (action) {
-            User u = LoginDAO.getInstance().selectByUserName(inputTaiKhoan);
+            NhanVien u = LoginDAO.getInstance().selectByMaNV(inputTaiKhoan);
             if(u == null){
                 JOptionPane.showMessageDialog(this, "Tài khoản của bạn không tồn tại trên hệ thống", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 
             }
             else{
-                if(u.getPassWord().trim().equals(inputMatKhau)){
+
+                if(u.getMatKhau().trim().equals(inputMatKhau)){
                     new Main().setVisible(true); // invoke Main GUI
                     this.dispose(); // close login GUI
                 }
@@ -180,18 +182,14 @@ public class Main_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main_Login().setVisible(true);
-            }
-        });
-
-
-                
-        
-    }
+//    public static void main(String args[]) {
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Main_Login().setVisible(true);
+//            }
+//        });
+//}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.UWPButton btnDangNhap;

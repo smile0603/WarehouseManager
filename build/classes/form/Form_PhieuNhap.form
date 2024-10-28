@@ -122,6 +122,9 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGradient1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="swing.ButtonGradient" name="buttonGradient2">
               <Properties>

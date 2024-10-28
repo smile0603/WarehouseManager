@@ -1,11 +1,16 @@
 
 package form;
 
+import entity.NhaCungCap;
 import model.StatusType;
 import swing.ScrollBar;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import DAO.NhaCungCapDAO;
+import javax.swing.table.DefaultTableModel;
+import swing.Table;
 
 public class Form_NhaCC extends javax.swing.JPanel {
 
@@ -13,6 +18,17 @@ public class Form_NhaCC extends javax.swing.JPanel {
     public Form_NhaCC() {
         initComponents();
         
+        
+    }
+    public static void updateTableNCC(){
+        ArrayList<NhaCungCap> dsNCC = NhaCungCapDAO.getAllNhaCungCap();
+        for(NhaCungCap ncc : dsNCC){
+            String maNCC = String.valueOf(ncc.getMaNCC());
+            String sdt = String.valueOf(ncc.getSdtNCC());
+            
+            String [] row = {maNCC , ncc.getTenNCC(), ncc.getDiaChi(),ncc.getEmail(),sdt};
+            
+        }
     }
 
 
@@ -26,8 +42,6 @@ public class Form_NhaCC extends javax.swing.JPanel {
         table = new swing.Table();
         panelBorder2 = new swing.PanelBorder();
         jLabel2 = new javax.swing.JLabel();
-        spTable1 = new javax.swing.JScrollPane();
-        table1 = new swing.Table();
         jPanel1 = new javax.swing.JPanel();
         buttonGradient1 = new swing.ButtonGradient();
         buttonGradient2 = new swing.ButtonGradient();
@@ -92,45 +106,32 @@ public class Form_NhaCC extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(127, 127, 127));
         jLabel2.setText("Bảng danh sách nhà cung cấp");
 
-        spTable1.setBorder(null);
-
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã NCC", "Tên NCC", "Địa chỉ", "Email", "Số điện thoại"
-            }
-        ));
-        table1.setMinimumSize(new java.awt.Dimension(105, 0));
-        table1.setPreferredSize(new java.awt.Dimension(525, 0));
-        table1.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        spTable1.setViewportView(table1);
-
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
         panelBorder2Layout.setHorizontalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable1)
-                    .addComponent(jLabel2))
-                .addGap(20, 20, 20))
+                .addComponent(jLabel2)
+                .addContainerGap(613, Short.MAX_VALUE))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
         jPanel1.setPreferredSize(new java.awt.Dimension(905, 96));
 
         buttonGradient1.setText("Thêm mới");
         buttonGradient1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonGradient1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGradient1ActionPerformed(evt);
+            }
+        });
 
         buttonGradient2.setText("Xóa");
         buttonGradient2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -190,6 +191,11 @@ public class Form_NhaCC extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
+        // TODO add your handling code here:
+        new DesignTable().setVisible(true);
+    }//GEN-LAST:event_buttonGradient1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.ButtonGradient buttonGradient1;
@@ -202,8 +208,6 @@ public class Form_NhaCC extends javax.swing.JPanel {
     private swing.PanelBorder panelBorder1;
     private swing.PanelBorder panelBorder2;
     private javax.swing.JScrollPane spTable;
-    private javax.swing.JScrollPane spTable1;
     private swing.Table table;
-    private swing.Table table1;
     // End of variables declaration//GEN-END:variables
 }

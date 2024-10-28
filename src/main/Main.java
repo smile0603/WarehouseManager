@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     private Form_ThongKe form3;
     private Form_DangNhap form_dangNhap;
     private Form_NhaCC form4;
-    private Form_ThemPhieuNhap form_themPN;
+    
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -33,13 +33,13 @@ public class Main extends javax.swing.JFrame {
         form3 = new Form_ThongKe();
         form4 = new Form_NhaCC();
         form_dangNhap = new Form_DangNhap();
-        form_themPN = new Form_ThemPhieuNhap();
+        
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
                 if (index == 0) {
-                    setForm(form_themPN);
+                    setForm(home);
                 } else if (index == 1) {
                     setForm(form1);
                 } else if (index == 2) {
@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame {
                     setForm(form4);
                 }
                 else if (index == 7) {
-                    setForm(form_dangNhap);
+                    setForm(home);
                 }
                 else if (index == 8) {
                     setForm(form2);

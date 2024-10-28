@@ -172,7 +172,7 @@ public class TextField extends JTextField {
     private void createHelperText(Graphics2D g2) {
         if (helperText != null && !helperText.equals("")) {
             Insets in = getInsets();
-            int height = getHeight() - 40;
+            int height = getHeight() - 15;
             g2.setColor(new Color(255, 76, 76));
             Font font = getFont();
             g2.setFont(font.deriveFont(0, font.getSize() - 1));
