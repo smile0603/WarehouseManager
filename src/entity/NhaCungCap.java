@@ -66,7 +66,20 @@ public class NhaCungCap {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
     }
+    
+    public Object[] toTableRow(int rowNum){
+        return new Object[]{false,rowNum,maNCC,this,diaChi,email,sdtNCC};
+    }
+    public Object[] toTableRow2(int rowNum){
+        return new Object[]{rowNum,maNCC,tenNCC,diaChi,email,sdtNCC};
+    }
 
-
+    @Override
+    public String toString() {
+        return tenNCC;
+    }
+ 
+    
+    
 
 }

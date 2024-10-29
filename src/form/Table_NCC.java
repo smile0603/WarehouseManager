@@ -1,13 +1,19 @@
 
 package form;
 
+import DAO.NhaCungCapDAO;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import entity.NhaCungCap;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
 
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -17,11 +23,12 @@ import table.CheckBoxTableHeaderRenderer;
 import table.TableHeaderAligment;
 
 
-public class DesignTable extends javax.swing.JFrame {
+public class Table_NCC extends javax.swing.JFrame {
 
-    public DesignTable() {
+    public Table_NCC() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         init();
     }
     private void init(){
@@ -67,26 +74,15 @@ public class DesignTable extends javax.swing.JFrame {
         
         table.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(table,0));
         table.getTableHeader().setDefaultRenderer(new TableHeaderAligment(table));
-        TestDataTable();
+        try {
+            config.JDBCUtil.getConnection();
+            loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void TestDataTable(){
-        DefaultTableModel model = (DefaultTableModel)table.getModel();
-        model.addRow(new Object[]{false,1,"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", "A"});
-        model.addRow(new Object[]{false,2,"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", "B"});
-        model.addRow(new Object[]{false,3,"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", "C"});
-        model.addRow(new Object[]{false,4,"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", "D"});
-        model.addRow(new Object[]{false,5,"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", "E"});
-        model.addRow(new Object[]{false,6,"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", "F"});
-        model.addRow(new Object[]{false,7,"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", "G"});
-        model.addRow(new Object[]{false,8,"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,9,"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,10,"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,11,"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,12,"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,13,"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", "H"});
-        model.addRow(new Object[]{false,14,"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", "H"});
-    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,8 +92,8 @@ public class DesignTable extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         lbTitle = new javax.swing.JLabel();
-        buttonAction1 = new swing.ButtonAction();
-        buttonAction2 = new swing.ButtonAction();
+        btnXoa = new swing.ButtonAction();
+        btnChinhSua = new swing.ButtonAction();
         bntThem = new swing.ButtonAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,9 +132,19 @@ public class DesignTable extends javax.swing.JFrame {
 
         lbTitle.setText("Tìm kiếm");
 
-        buttonAction1.setText("Xóa");
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
-        buttonAction2.setText("Chỉnh sửa");
+        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChinhSuaActionPerformed(evt);
+            }
+        });
 
         bntThem.setText("Thêm");
         bntThem.addActionListener(new java.awt.event.ActionListener() {
@@ -161,9 +167,9 @@ public class DesignTable extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
                         .addComponent(bntThem, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(buttonAction2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(buttonAction1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -174,8 +180,8 @@ public class DesignTable extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAction1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAction2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
@@ -201,9 +207,13 @@ public class DesignTable extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    // Load Data From tb_NCC 
 
+    
+    
     private void bntThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntThemActionPerformed
-        Form_ThemNhaCungCap2 formThemNCC = new Form_ThemNhaCungCap2();
+        Form_ThemNhaCungCap formThemNCC = new Form_ThemNhaCungCap();
+        NhaCungCapDAO nccDAO = new NhaCungCapDAO();
         DefaultOption option = new DefaultOption(){
             @Override
             public boolean closeWhenClickOutside() {
@@ -215,28 +225,162 @@ public class DesignTable extends javax.swing.JFrame {
         GlassPanePopup.showPopup(new SimplePopupBorder(formThemNCC,"Thêm nhà cung cấp",actions,(pc,i) ->{
             if(i == 1){
                 //Save
+                try {
+                    nccDAO.create(formThemNCC.getData());
+                    pc.closePopup();
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS,"Thêm thành công!");
+                    loadData();
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }else{
                 pc.closePopup();
             }
-        }), option);  
+        }), option);
     }//GEN-LAST:event_bntThemActionPerformed
 
-    public static void main(String args[]) {
-        FlatRobotoFont.install();
-        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY,Font.PLAIN, 13));
-        FlatMacLightLaf.setup();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DesignTable().setVisible(true);
+    private void btnChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSuaActionPerformed
+        // TODO add your handling code here:
+        List<NhaCungCap> list = getSelectedData();
+        if(!list.isEmpty()){
+            if(list.size() == 1){
+                NhaCungCap ncc = list.get(0);
+                NhaCungCapDAO nccDAO = new NhaCungCapDAO();
+                Form_ThemNhaCungCap formThemNCC = new Form_ThemNhaCungCap();
+                formThemNCC.loadData(nccDAO, ncc);
+                DefaultOption option = new DefaultOption(){
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+            
+        };
+        String actions[] = new String[]{"Hủy", "Chỉnh sửa"};
+        GlassPanePopup.showPopup(new SimplePopupBorder(formThemNCC,"Chỉnh sửa nhà cung cấp",actions,(pc,i) ->{
+            if(i == 1){
+                //Edit
+                try {
+                    NhaCungCap nccEdit = formThemNCC.getData();
+                    nccEdit.setMaNCC(ncc.getMaNCC());
+                    nccDAO.edit(nccEdit);
+                    pc.closePopup();
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS,"Chỉnh sửa thành công!");
+                    
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                loadData();
+            }else{
+                pc.closePopup();
+            }
+        }), option);
+            }else{
+                Notifications.getInstance().show(Notifications.Type.WARNING, "Chỉ chọn một nhà cung cấp");
+            }
+        }else{
+             Notifications.getInstance().show(Notifications.Type.WARNING, "Chọn dòng cần chỉnh sửa");
+        }
+    }//GEN-LAST:event_btnChinhSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        List<NhaCungCap> list = getSelectedData();
+        if(!list.isEmpty()){
+            DefaultOption option = new DefaultOption(){
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+            
+        };
+        String actions[] = new String[]{"Hủy", "Xóa"};
+        JLabel label = new JLabel("Bạn có muốn xóa "+list.size()+" nhà cung cấp");
+        label.setBorder(new EmptyBorder(0,25,0,25));
+        NhaCungCapDAO nccDAO = new NhaCungCapDAO();
+        GlassPanePopup.showPopup(new SimplePopupBorder(label,"Xác nhận xóa",actions,(pc,i) ->{
+            if(i == 1){
+                //Delete
+                try {
+                    for(NhaCungCap ncc : list){
+                        nccDAO.delete(ncc.getMaNCC());
+                    }
+                    pc.closePopup();
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS,"Xóa thành công!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                loadData();
+            }else{
+                pc.closePopup();
+            }
+        }), option);
+            
+        }else{
+            Notifications.getInstance().show(Notifications.Type.WARNING, "Chọn dòng cần xoá");
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private List<NhaCungCap> getSelectedData(){
+        List<NhaCungCap> list = new ArrayList<>();
+        for (int i = 0; i < table.getRowCount(); i++) {
+            if((boolean)table.getValueAt(i, 0)){
+                NhaCungCap ncc = (NhaCungCap) table.getValueAt(i, 3); // Lien quan toi method toTableRow
+                list.add(ncc);
                 
             }
-        });
+            
+        }
+        return list;
     }
-
+//    public static void main(String args[]) {
+//        FlatRobotoFont.install();
+//        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY,Font.PLAIN, 13));
+//        FlatMacLightLaf.setup();
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new DesignTable().setVisible(true);
+//                
+//            }
+//        });
+//    }
+    private void loadData(){
+        NhaCungCapDAO nccDAO = new NhaCungCapDAO();
+        try {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            if(table.isEditing()){
+                table.getCellEditor().stopCellEditing();
+            }
+            model.setRowCount(0);
+            List<NhaCungCap> listNCC = nccDAO.getAllNhaCungCap();
+            for(NhaCungCap ncc : listNCC){
+                model.addRow(ncc.toTableRow(table.getRowCount() + 1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        private void searchData(String txtSearch){
+        NhaCungCapDAO nccDAO = new NhaCungCapDAO();
+        try {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            if(table.isEditing()){
+                table.getCellEditor().stopCellEditing();
+            }
+            model.setRowCount(0);
+            List<NhaCungCap> listNCC = nccDAO.search(txtSearch);
+            for(NhaCungCap ncc : listNCC){
+                model.addRow(ncc.toTableRow(table.getRowCount() + 1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.ButtonAction bntThem;
-    private swing.ButtonAction buttonAction1;
-    private swing.ButtonAction buttonAction2;
+    private swing.ButtonAction btnChinhSua;
+    private swing.ButtonAction btnXoa;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel panel;
     private javax.swing.JScrollPane scroll;

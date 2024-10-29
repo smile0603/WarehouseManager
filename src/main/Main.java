@@ -1,16 +1,22 @@
 
 package main;
 
+import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import event.EventMenuSelected;
+import form.Table_NCC;
 import form.Form_PhieuNhap;
 import form.Form_PhieuXuat;
-import form.Form_NhaCC;
+
 import form.Form_DangNhap;
 import form.Form_Home;
-import form.Form_ThemPhieuNhap;
+import form.Form_NhaCungCap;
+
 import form.Form_ThongKe;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JComponent;
+import javax.swing.UIManager;
 
 
 public class Main extends javax.swing.JFrame {
@@ -21,9 +27,13 @@ public class Main extends javax.swing.JFrame {
     private Form_PhieuXuat form2;
     private Form_ThongKe form3;
     private Form_DangNhap form_dangNhap;
-    private Form_NhaCC form4;
+    private Form_NhaCungCap form4;
+    private Table_NCC formThemNCC;
     
     public Main() {
+        FlatRobotoFont.install();
+        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY,Font.PLAIN, 13));
+        FlatMacLightLaf.setup();
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         
@@ -31,9 +41,9 @@ public class Main extends javax.swing.JFrame {
         form1 = new Form_PhieuNhap();
         form2 = new Form_PhieuXuat();
         form3 = new Form_ThongKe();
-        form4 = new Form_NhaCC();
+        form4 = new Form_NhaCungCap();
         form_dangNhap = new Form_DangNhap();
-        
+        formThemNCC = new Table_NCC();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override

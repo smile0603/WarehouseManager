@@ -179,7 +179,7 @@ public class Form_PhieuNhap extends javax.swing.JPanel {
 
     private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
         // TODO add your handling code here:
-        new Form_ThemPhieuNhap2().setVisible(true);
+        new Form_ThemPhieuNhap().setVisible(true);
         
     }//GEN-LAST:event_buttonGradient1ActionPerformed
 

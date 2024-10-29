@@ -182,14 +182,14 @@ public class Main_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
 
-//    public static void main(String args[]) {
-//
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Main_Login().setVisible(true);
-//            }
-//        });
-//}
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Main_Login().setVisible(true);
+            }
+        });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.UWPButton btnDangNhap;
