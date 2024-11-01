@@ -3,7 +3,6 @@ package entity;
 public class NhanVien {
     private String maNV;
     private String tenNV;
-    private String matKhau;
     private String mail;
     private int sdt;
 
@@ -21,14 +20,6 @@ public class NhanVien {
 
     public void setTenNV(String tenNV) {
         this.tenNV = tenNV;
-    }
-
-    public String getMatKhau() {
-        return matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
     }
 
     public String getMail() {
@@ -50,24 +41,28 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String tenNV, String matKhau, String mail, int sdt) {
+
+    public NhanVien(String maNV, String tenNV, String mail, int sdt) {
         this.maNV = maNV;
         this.tenNV = tenNV;
-        this.matKhau = matKhau;
         this.mail = mail;
         this.sdt = sdt;
     }
-    
-
-    public NhanVien(String maNV, String matKhau) {
+    public NhanVien(String maNV, String tenNV) {
         this.maNV = maNV;
-        this.matKhau = matKhau;
+        this.tenNV = tenNV;
 
-    }
+    }    
 
     @Override
     public String toString() {
-        return super.toString(); 
+        return tenNV;
     }
+    
+    
+
+        
+
+
     
 }

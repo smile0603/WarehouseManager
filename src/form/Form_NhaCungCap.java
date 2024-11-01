@@ -184,7 +184,7 @@ public class Form_NhaCungCap extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuanLyNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNCCActionPerformed
-        new Table_NCC().setVisible(true);
+        new QuanLyNCC().setVisible(true);
     }//GEN-LAST:event_btnQuanLyNCCActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed

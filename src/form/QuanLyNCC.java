@@ -23,9 +23,9 @@ import table.CheckBoxTableHeaderRenderer;
 import table.TableHeaderAligment;
 
 
-public class Table_NCC extends javax.swing.JFrame {
+public class QuanLyNCC extends javax.swing.JFrame {
 
-    public Table_NCC() {
+    public QuanLyNCC() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -129,6 +129,12 @@ public class Table_NCC extends javax.swing.JFrame {
             table.getColumnModel().getColumn(1).setMaxWidth(40);
             table.getColumnModel().getColumn(2).setMaxWidth(80);
         }
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         lbTitle.setText("Tìm kiếm");
 
@@ -321,6 +327,11 @@ public class Table_NCC extends javax.swing.JFrame {
             Notifications.getInstance().show(Notifications.Type.WARNING, "Chọn dòng cần xoá");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        searchData(txtSearch.getText().trim());
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     private List<NhaCungCap> getSelectedData(){
         List<NhaCungCap> list = new ArrayList<>();

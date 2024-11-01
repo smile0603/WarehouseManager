@@ -4,11 +4,9 @@ package main;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import event.EventMenuSelected;
-import form.Table_NCC;
+import form.QuanLyNCC;
 import form.Form_PhieuNhap;
 import form.Form_PhieuXuat;
-
-import form.Form_DangNhap;
 import form.Form_Home;
 import form.Form_NhaCungCap;
 
@@ -26,9 +24,8 @@ public class Main extends javax.swing.JFrame {
     private Form_PhieuNhap form1;
     private Form_PhieuXuat form2;
     private Form_ThongKe form3;
-    private Form_DangNhap form_dangNhap;
     private Form_NhaCungCap form4;
-    private Table_NCC formThemNCC;
+    private QuanLyNCC formThemNCC;
     
     public Main() {
         FlatRobotoFont.install();
@@ -42,8 +39,8 @@ public class Main extends javax.swing.JFrame {
         form2 = new Form_PhieuXuat();
         form3 = new Form_ThongKe();
         form4 = new Form_NhaCungCap();
-        form_dangNhap = new Form_DangNhap();
-        formThemNCC = new Table_NCC();
+
+        formThemNCC = new QuanLyNCC();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override

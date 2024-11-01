@@ -1,2 +1,0 @@
-jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons
-jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons$1
